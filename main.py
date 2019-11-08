@@ -1,5 +1,5 @@
 from functions import all_funcs
-from nonfirst_order_one_arg_methods import tangent_lines_method
+from nonfirst_order_one_arg_methods import tangent_lines_method, newton_raphson_method, chord_method
 from zero_order_methods import dichotomy_method, gold_sech_method, naive_method
 
 func = all_funcs[32]
@@ -9,10 +9,14 @@ eps = func.eps
 
 print("Minimize f(x)=5*(x**2) - 8*(x**(5/4)) - 20*x")
 print("=" * 20)
-print("naive_method min:", naive_method(func, a, b, eps, debug=True))
+print("naive_method min:", naive_method(func, a, b, eps=eps, debug=True))
 print("=" * 20)
-print("dichotomy_method min:", dichotomy_method(func, a, b, eps, delta_mult=0.25, debug=True))
+print("dichotomy_method min:", dichotomy_method(func, a, b, eps=eps, delta_mult=0.25, debug=True))
 print("=" * 20)
-print("gold_sech_method min:", gold_sech_method(func, a, b, eps, debug=True))
+print("gold_sech_method min:", gold_sech_method(func, a, b, eps=eps, debug=True))
 print("=" * 20)
-print("tangent_lines_method min:", tangent_lines_method(func, a, b, eps, debug=True))
+print("tangent_lines_method min:", tangent_lines_method(func, a, b, eps=eps, debug=True))
+print("=" * 20)
+print("newton_raphson_method min:", newton_raphson_method(func, x0=a, eps=eps, debug=True))
+print("=" * 20)
+print("chord_method min:", chord_method(func, x0=a, eps=eps, debug=True))
