@@ -1,9 +1,8 @@
 from math import ceil, sqrt
-from functions import all_funcs
 from utils import FuncCounter
 
 
-def simple_minimize(func, a, b, eps=0.01, debug=False):
+def naive_method(func, a, b, eps=0.01, debug=False):
     """Минимизация наивным методом"""
     f = FuncCounter(func)
     n = ceil((b - a) / eps)
@@ -15,11 +14,11 @@ def simple_minimize(func, a, b, eps=0.01, debug=False):
 
     minimum = min(tests)[1]
     if debug:
-        print("simple_minimize counter", f.counter)
+        print("naive_method func counter", f.counter)
     return minimum
 
 
-def dichotomy(func, a, b, eps=0.01, delta_mult=1 / 2, debug=False):
+def dichotomy_method(func, a, b, eps=0.01, delta_mult=0.5, debug=False):
     """Минимизация методом дихотомии"""
     f = FuncCounter(func)
     delta = eps * delta_mult
@@ -39,11 +38,11 @@ def dichotomy(func, a, b, eps=0.01, delta_mult=1 / 2, debug=False):
             bi = bi
 
     if debug:
-        print("dichotomy counter", f.counter)
+        print("dichotomy_method func counter", f.counter)
     return (bi + ai) / 2
 
 
-def gold_sech(func, a, b, eps=0.01, debug=False):
+def gold_sech_method(func, a, b, eps=0.01, debug=False):
     """Минимизация методом золотого сечения"""
     f = FuncCounter(func)
     ai = a
@@ -64,17 +63,6 @@ def gold_sech(func, a, b, eps=0.01, debug=False):
             di = ai + (bi - ai) * (sqrt(5) - 1) / 2
 
     if debug:
-        print("gold_sech counter", f.counter)
+        print("gold_sech_method func counter", f.counter)
 
     return (bi + ai) / 2
-
-
-func = all_funcs[32]
-a = func.a
-b = func.b
-eps = func.aps
-
-print("Minimize f(x)=5*(x**2) - 8*(x**(5/4)) - 20*x")
-print("simple_minimize min:", simple_minimize(func, a, b, eps, debug=True))
-print("dichotomy min:", dichotomy(func, a, b, eps, 1 / 4, debug=True))
-print("gold_sech min:", gold_sech(func, a, b, eps, debug=True))
