@@ -1,12 +1,5 @@
 from math import log, tan, sin, sqrt, e, log10, exp, atan2, pi, cos
-
-
-def with_params_optimisation(**kwargs):
-    def deco(func):
-        func.__dict__.update(kwargs)
-        return func
-
-    return deco
+from utils import with_params_optimisation
 
 
 @with_params_optimisation(a=1, b=1.5, eps=0.05)
