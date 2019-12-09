@@ -6,20 +6,23 @@ class FuncCounter:
     В атрибуте counter хранится количество уникальных вызовов функции func
     """
 
-    def __init__(self, func):
+    def __init__(self, func, without_memoization=False):
         self.counter = 0
         self.func = func
+        self.without_memoization = without_memoization
         self.calls = dict()
 
     def __call__(self, *args, **kwargs):
-        x = args
-
-        if x in self.calls:
-            return self.calls[x]
+        if not self.without_memoization:
+            x = args
+            if x in self.calls:
+                return self.calls[x]
 
         result = self.func(*args, **kwargs)
-        self.calls[x] = result
         self.counter += 1
+        if not self.without_memoization:
+            self.calls[x] = result
+
         return result
 
 

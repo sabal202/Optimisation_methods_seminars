@@ -1,5 +1,6 @@
 import sympy
 from sympy.parsing.sympy_parser import parse_expr
+
 from utils import FuncCounter
 
 
@@ -49,7 +50,7 @@ def newton_raphson_method(func, x0, eps=0.01, n=16, debug=False):
     diff_f_xk = diff_f(x0)
     diff2_f_xk = diff2_f(x0)
     xk = x0 - diff_f_xk / diff2_f_xk
-    while abs(xk - x0) > 2 * eps:
+    while abs(xk - x0) > eps:
         x0 = xk
         diff_f_xk = diff_f(x0)
         diff2_f_xk = diff2_f(x0)
@@ -73,7 +74,7 @@ def chord_method(func, x0, eps=0.01, n=16, debug=False):
     xk = x0 + 2.1 * eps
     diff_f_xk = diff_f(xk)
     xk1 = xk - diff_f_xk * (xk - x0) / (diff_f_xk - diff_f_x0)
-    while abs(diff_f_xk) > 2 * eps:
+    while abs(diff_f_xk) > eps:
         x0 = xk
         xk = xk1
         diff_f_x0 = diff_f_xk
