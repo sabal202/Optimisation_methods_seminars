@@ -15,7 +15,6 @@ def constant_step_descent(grad, x0, alpha=0.02, eps=0.01, debug=False):
             break
         else:
             x0 = x1.copy()
-            print(x0, alpha, gr)
             x1 = x0 - alpha * gr
     if debug:
         print("constant_step_descent grad counter", grad.counter)
@@ -67,9 +66,9 @@ def fastest_gradient_descent(func, grad, x0, eps=0.01, max_iter=float('inf'), de
             alpha = minimize(lambda a: func(x0 - a * gr), 0, 1, eps * 10)
             x1 = x0 - alpha * gr
     if debug:
-        print("step_partition_descent func counter", func.counter)
-        print("step_partition_descent grad counter", grad.counter)
-        print("step_partition_descent minimizations counter", minimize.counter)
+        print("fastest_gradient_descent func counter", func.counter)
+        print("fastest_gradient_descent grad counter", grad.counter)
+        print("fastest_gradient_descent minimizations counter", minimize.counter)
     return tuple(x1)
 
 
@@ -93,7 +92,7 @@ def accelerated_gradient_descent(func, grad, x0, eps=0.01, debug=False):
             alpha = gold_sech_method(lambda a: func(x0 + a * (y0 - x0)), 0, 1, eps * 10)
             x1 = x0 + alpha * (y0 - x0)
     if debug:
-        print("step_partition_descent func counter", func.counter)
-        print("step_partition_descent grad counter", grad.counter)
-        print("step_partition_descent FGD counter", FGD.counter)
+        print("accelerated_gradient_descent func counter", func.counter)
+        print("accelerated_gradient_descent grad counter", grad.counter)
+        print("accelerated_gradient_descent FGD counter", FGD.counter)
     return tuple(x1)
